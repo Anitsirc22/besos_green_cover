@@ -8,12 +8,30 @@ body {margin: 0px; padding: 0px; box-sizing: border-box; font-size: 12px;}
 }
 
 #slider {
+	-webkit-appearance: none;
 	width: 100%;
 	position: absolute;
-	bottom: 0px;
+	bottom: 10px;
 	left: 0px;
-	height: 35px;
+	height: 7px;
 	z-index: 100;
+	cursor: pointer;
+	background: black;
+	opacity:0.4
+
+}
+
+#slider:hover {
+  opacity: 0.7;
+}
+
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 25px;
+  background: grey;
+  cursor: pointer;
 }
 
 .map-container {

@@ -19,7 +19,7 @@ function showData (json_map, bounds){
 		
 	// var center=d3.geoCentroid(json_map)
 	var center = [Math.abs(bounds[1][0] - bounds[0][0])/2, Math.abs(bounds[1][1] - bounds[0][1])/2]
-	var scale  = Math.abs(bounds[1][0] - bounds[0][0])/mapWidth
+	var scale  = mapWidth/Math.abs(bounds[1][0] - bounds[0][0])
 /*	var bounds  = path.bounds(json_map);*/
     // var hscale  = scale*mapWidth  / Math.abs(bounds[1][0] - bounds[0][0]);
     // var vscale  = scale*mapHeight / Math.abs(bounds[1][1] - bounds[0][1]);

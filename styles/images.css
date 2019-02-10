@@ -1,4 +1,4 @@
-.image-content{
+.image-container{
 	position:relative;/*perque els fills es col·loquin en relacio a aquest*/
 	height:100%;
 	width: calc(100% - 15px);
