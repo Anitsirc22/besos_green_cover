@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+
+	<script src="https://d3js.org/d3.v5.js"></script>
+	<style>
+		#image{
+			background-image: url("png/ndvi_2016.png");
+			height:100vh;
+			width:100vw;
+			background-size:contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 120%
+		}
+	</style>
+</head>
+<body>
+	<div id="image"></div>
+	<svg id="map_container" height="600" width="1500">
+		<g id="map" transform="translate(0,0)"></g>
+	</svg>
+
+	<script src="script/map.js"></script>
+	<!-- <script src="script/graph.js"></script> -->
+
+</body>
+</html>
