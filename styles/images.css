@@ -1,0 +1,60 @@
+.image-content{
+	position:relative;/*perque els fills es col·loquin en relacio a aquest*/
+	height:100%;
+	width: calc(100% - 15px);
+}
+
+.image {
+	height:100%;
+	width: 100%;
+	background-size:contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	opacity: 0;
+}
+
+.image2009{
+	background-image: url("../png/ndvi_2009.png");
+	opacity: 1;
+	z-index: 10;
+
+}
+.image2010{
+	background-image: url("../png/ndvi_2010.png");
+	z-index: 11;
+
+}
+.image2011{
+	background-image: url("../png/ndvi_2011.png");
+	z-index: 12;
+
+}
+.image2012{
+	background-image: url("../png/ndvi_2012.png");
+	z-index: 13;
+
+}
+.image2013{
+	background-image: url("../png/ndvi_2013.png");
+	z-index: 14;
+
+}
+.image2014{
+	background-image: url("../png/ndvi_2014.png");
+	z-index: 15;
+
+}
+.image2015{
+	background-image: url("../png/ndvi_2015.png");
+	z-index: 16;
+
+}
+.image2016{
+	background-image: url("../png/ndvi_2016.png");
+	z-index: 17;
+
+}
