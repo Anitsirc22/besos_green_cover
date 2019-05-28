@@ -1,7 +1,10 @@
-.image-container{
-	position: relative;/*perque els fills es col·loquin en relacio a aquest*/
-	height:100%;
-	width: calc(100% - 15px);
+.image-container {
+	position: absolute;/*perque els fills es col·loquin en relacio a aquest*/
+	height: 100%;
+  width: 100%;
+  z-index: -10;
+  top: 0px;
+  left: 0px;
 }
 
 .image {

@@ -7,7 +7,6 @@
 
 	<!-- SCRIPTS -->
 	<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
-	<script type="text/javascript" src="script/main.js"></script>
 
 	<!-- VENDOR -->
   	<script type="text/javascript" src="vendor/leaflet/leaflet.js"></script>
@@ -15,38 +14,52 @@
 
 	<!-- STYLES -->
 	<link href="/styles/main.css" rel="stylesheet" type="text/css"/>
-	<link href="/styles/images.css" rel="stylesheet" type="text/css"/>
+  <link href="/styles/images.css" rel="stylesheet" type="text/css"/>
+  <link href="/styles/layout.css" rel="stylesheet" type="text/css"/>
 
 	<!-- DATA -->
-  	<script src="json/ndvi_reclass_2014.json"></script>
+  <script src="json/ndvi_reclass_2014.json"></script>
+  <script src="json/ndvi_reclass_2015.json"></script>
+  <script src="json/ndvi_reclass_2016.json"></script>
 
 </head>
 <body>
 	<div id="main-content">
-		<div class="label-wrapper">
-			<div class="label">hello</div>
-		</div>
-		<div class="image-container">
-			<div class="image image2009" ></div>
-			<div class="image image2010" ></div>
-			<div class="image image2011" ></div>
-			<div class="image image2012" ></div>
-			<div class="image image2013" ></div>
-			<div class="image image2014" ></div>
-			<div class="image image2015" ></div>
-			<div class="image image2016" ></div>
-		</div>
-
-		<!-- <div class="map-container">
-			<div id=map-leaflet></div>
-			<svg id="map"></svg>
-		</div> -->
+    <div class="left-section app-section">
+      <div class="map-container">
+        <div id=map-leaflet></div>
+        <!-- <svg id="map"></svg> -->
+      </div>
+      <div id="stacked-container">
+        STACKED
+      </div>
+    </div>
+    <div class="right-section app-section visible">
+      <div class="label-wrapper">
+        <div class="label">hello</div>
+      </div>
+      <div class="image-container">
+        <div class="image image2009" ></div>
+        <div class="image image2010" ></div>
+        <div class="image image2011" ></div>
+        <div class="image image2012" ></div>
+        <div class="image image2013" ></div>
+        <div class="image image2014" ></div>
+        <div class="image image2015" ></div>
+        <div class="image image2016" ></div>
+      </div>
+      <div class="quality-chart" style="display: none; position: absolute; pointer-events: none;"></div>
+    </div>
+    <div id="mouse-catcher" class="graphs-container"></div>
 		<div class="slider-container">
 			<input value=0 max=70 min=0 step=1 type="range" id="slider"></div>
 		</div>
 
-	<!-- <script src="script/map.js"></script> -->
-	<script src="script/graph.js"></script>
-	<!-- <script type="text/javascript" src="script/leaflet_map.js"></script> -->
+	<script src="script/map.js"></script>
+  <script src="script/graph.js"></script>
+  <script type="text/javascript" src="script/mouseListener.js"></script>
+  <script type="text/javascript" src="script/sliderHandler.js"></script>
+  <script type="text/javascript" src="script/main.js"></script>
+	<script type="text/javascript" src="script/leaflet_map.js"></script>
 </body>
 </html>

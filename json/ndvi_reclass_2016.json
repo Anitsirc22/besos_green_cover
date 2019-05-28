@@ -1,4 +1,4 @@
-{
+var ndvi_2016 = {
   "type": "FeatureCollection",
   "features": [
     {
