@@ -1,7 +1,8 @@
 var SliderHandler = function (settings) {
   this.animation;
   this.inputCallback = settings.callback;
-	this.slider=document.getElementById("slider");
+  this.slider=document.getElementById("slider");
+  this.label = document.getElementById('label');
 	this.images=Array.apply(null, document.getElementsByClassName("image"));//retorna una llista dels div
 	this.baseImage = this.images.shift();//to delete the first item of the list
   
@@ -37,4 +38,36 @@ SliderHandler.prototype.sliderChangeCallback = function (e) {
   }
   let opacity = (value-(index*10))/10;
   currentImage.style.opacity = opacity;
+  this.label.innerText = this.getMonth(index);
 };
+
+SliderHandler.prototype.getMonth = function (sliderValue) {
+  var text;
+  switch (sliderValue) {
+    case 0:
+      text="Agost 2009";
+      break;
+    case 1:
+      text="Octubre 2010";
+      break;
+    case 2:
+      text="Juny 2011";
+      break;
+    case 3:
+      text="Maig 2012";
+      break;
+    case 4:
+      text="Juny 2013";
+      break;
+    case 5:
+      text="Juny 2014";
+      break;
+    case 6:
+      text="Agost 2015";
+      break;
+    case 6.99:
+      text="Novembre 2016";
+      break;
+  }
+  return text;
+  }
