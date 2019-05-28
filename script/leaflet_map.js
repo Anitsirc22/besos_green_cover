@@ -24,8 +24,8 @@ var mapLeaflet = L.map("map-leaflet",{zoomControl:false});
 mapLeaflet.fitBounds(getViewportCoords())
 
 
-console.log(mapLeaflet.getBounds())
-console.log(getViewportCoords())
+// console.log(mapLeaflet.getBounds())
+// console.log(getViewportCoords())
 
 //STYLES
 var shape = new L.PatternCircle({ x: 7, y: 7, radius: 4, fill: true, color:'black',weight:2});

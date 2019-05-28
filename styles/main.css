@@ -6,13 +6,13 @@ body {margin: 0px; padding: 0px; box-sizing: border-box; font-size: 12px;}
 	position: relative;
 	overflow: hidden;
 }
-/*
-.label-wrapper{
-	position:absolute;
-	right:10px;
-	top:100px;
+
+.label-wrapper {
+	position: absolute;
+	right: 10px;
+	top: 100px;
 	z-index: 500;
-}*/
+}
 
 #slider {
 	-webkit-appearance: none;
