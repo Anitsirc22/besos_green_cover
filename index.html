@@ -8,9 +8,17 @@
 	<!-- SCRIPTS -->
 	<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
 	<script type="text/javascript" src="script/main.js"></script>
+
+	<!-- VENDOR -->
+  	<script type="text/javascript" src="vendor/leaflet/leaflet.js"></script>
+  	<script src="vendor/Leaflet.pattern-master/dist/leaflet.pattern-src.js"></script>
+
 	<!-- STYLES -->
 	<link href="/styles/main.css" rel="stylesheet" type="text/css"/>
 	<link href="/styles/images.css" rel="stylesheet" type="text/css"/>
+
+	<!-- DATA -->
+  	<script src="json/leaflet_ndvi_reclass_2014.json"></script>
 
 </head>
 <body>
@@ -28,16 +36,17 @@
 			<div class="image image2015" ></div>
 			<div class="image image2016" ></div>
 		</div>
-		
 
 		<div class="map-container">
+			<div id=map-leaflet></div>
 			<svg id="map"></svg>
 		</div>
-		<div class="slider-container"><input value=0 max=70 min=0 step=1 type="range" id="slider"></div>
-	</div>
+		<div class="slider-container">
+			<input value=0 max=70 min=0 step=1 type="range" id="slider"></div>
+		</div>
 
 	<script src="script/map.js"></script>
-	<!-- <script src="script/graph.js"></script> -->
-
+	<script src="script/graph.js"></script>
+	<script type="text/javascript" src="script/leaflet_map.js"></script>
 </body>
 </html>

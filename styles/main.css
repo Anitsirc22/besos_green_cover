@@ -4,7 +4,7 @@ body {margin: 0px; padding: 0px; box-sizing: border-box; font-size: 12px;}
 	width: 100vw;
 	height: 100vh;
 	position: relative;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 /*
 .label-wrapper{
@@ -48,4 +48,13 @@ body {margin: 0px; padding: 0px; box-sizing: border-box; font-size: 12px;}
 	width: 100%;
 	width: 100%;
 	z-index: 50;
+}
+
+#map-leaflet{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:100; 
+    top:0;
+    left:0;
 }

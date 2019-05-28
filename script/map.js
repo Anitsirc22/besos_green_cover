@@ -9,7 +9,6 @@ function fetchMapData () {
 function showData (json_map, bounds){
 	let mapHeight=window.innerHeight
 	let mapWidth=window.innerWidth
-	//console.log(json_map)
 
 	
 	// var projection=d3.geoMercator()
@@ -18,17 +17,19 @@ function showData (json_map, bounds){
 	// 	.translate([mapWidth/2,mapHeight/2])
 		
 	// var center=d3.geoCentroid(json_map)
-	var center = [Math.abs(bounds[1][0] - bounds[0][0])/2, Math.abs(bounds[1][1] - bounds[0][1])/2]
-	var scale  = mapWidth/Math.abs(bounds[1][0] - bounds[0][0])
-/*	var bounds  = path.bounds(json_map);*/
-    // var hscale  = scale*mapWidth  / Math.abs(bounds[1][0] - bounds[0][0]);
-    // var vscale  = scale*mapHeight / Math.abs(bounds[1][1] - bounds[0][1]);
-    // var scale   = (hscale < vscale) ? hscale : vscale;
-    var offset  = [mapWidth - (bounds[0][0] + bounds[1][0])/2,mapHeight - (bounds[0][1] + bounds[1][1])/2];
+	var center = [bounds[1][0]+Math.abs(bounds[1][0] - bounds[0][0])/2, bounds[1][1]+Math.abs(bounds[1][1] - bounds[0][1])/2];
+	var scale  = Math.abs(bounds[1][0] - bounds[0][0]);
+	scale = 50;
+	var bounds  = d3.geoPath().projection(d3.geoMercator()).bounds(json_map);
+	console.log(center);
+    var hscale  = scale*mapWidth  / Math.abs(bounds[1][0] - bounds[0][0]);
+    var vscale  = scale*mapHeight / Math.abs(bounds[1][1] - bounds[0][1]);
+    var scale   = (hscale < vscale) ? hscale : vscale;
+    var offset  = [mapWidth/2,mapHeight/2]; //[mapWidth - (bounds[0][0] + bounds[1][0])/2,mapHeight - (bounds[0][1] + bounds[1][1])/2];
     projection = d3.geoMercator()
     	.center(center)
     	.scale(scale)
-    	// .translate(offset);
+    	.translate(offset);
 	var path=d3.geoPath()
 		.projection(projection);
 
