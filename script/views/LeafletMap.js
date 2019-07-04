@@ -1,15 +1,15 @@
 function LeafletMap (settings) {
   this.map = L.map("map-leaflet",{
     zoomSnap: 1,
-    //zoom: 15,
     zoomControl: false
   });
 
   this._data = 2009;
 
-  // this.map.fitBounds(this.getViewportCoords());
-  this.onMouseOver = settings.onMouseOver;
-  this.onMouseLeave = settings.onMouseLeave;
+  this.map.fitBounds(this.getViewportCoords());
+  this.map.setZoom(17);
+  this.publicOnMouseOver = settings.onMouseOver;
+  this.publicOnMouseLeave = settings.onMouseLeave;
 /*
   debugger;*/
 
@@ -34,7 +34,7 @@ LeafletMap.prototype.draw = function () {
     style: this.style.bind(this),
     onEachFeature: this.bindInteraction.bind(this)
   }).addTo(this.map);
-  this.map.fitBounds(layer_2009.getBounds());
+  // this.map.fitBounds(layer_2009.getBounds());
   var layer_2010 = new L.geoJson(ndvi_2010,{
     style: this.style.bind(this),
     onEachFeature: this.bindInteraction.bind(this)
@@ -131,13 +131,13 @@ LeafletMap.prototype.bindInteraction = function (feature, layer) {
 }
 
 LeafletMap.prototype.highlightFeatures = function (e) {
-    const targetLayer = e.target;
+    const gridcode = e.gridcode != null ? e.gridcode : e.target.feature.properties.gridcode
     const currentLayer = this.layers[this._data];
     const layers = currentLayer._layers;
 
     Object.keys(layers).map((layerKey) => {
       let layer = layers[layerKey];
-      if (layer.feature && layer.feature.properties.gridcode == targetLayer.feature.properties.gridcode) {
+      if (layer.feature && layer.feature.properties.gridcode == gridcode) {
         layer.setStyle({
           weight: 1,
           color: 'none',
@@ -152,11 +152,7 @@ LeafletMap.prototype.highlightFeatures = function (e) {
       }
     });
 
-    this.onMouseOver({
-      gridcode: targetLayer.feature.properties.gridcode,
-      // feature: targetLayer.feature,
-      // features: Object.keys(layers).map((layerKey) => layers[layerKey].feature)
-    });
+    e.manual !== true && this.publicOnMouseOver({gridcode: gridcode, manual: true});
 }
 
 LeafletMap.prototype.resetHighlight = function (e) {
@@ -165,7 +161,7 @@ LeafletMap.prototype.resetHighlight = function (e) {
   Object.keys(layers).map((layerKey) => {
     currentLayer.resetStyle(layers[layerKey]);
   });
-  this.onMouseLeave();
+  e.manual !== true && this.publicOnMouseLeave({manual: true});
 }
 
 

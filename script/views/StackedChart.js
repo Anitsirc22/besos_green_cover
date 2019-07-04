@@ -13,7 +13,10 @@ const StackedChart = function (options) {
 
 	this.content = this.svg.append('g')
 		.attr('class', 'content')
-		.attr('transform', 'translate(' + this.margins.left +',' + this.margins.top + ')');
+    .attr('transform', 'translate(' + this.margins.left +',' + this.margins.top + ')');
+    
+  this.publicOnMouseOver = options.onMouseOver;
+  this.publicOnMouseLeave = options.onMouseLeave;
 };
 
 StackedChart.prototype.scaleX = function (data) {
@@ -29,14 +32,15 @@ StackedChart.prototype.scaleY = function (domain) {
 }
 
 StackedChart.prototype.colorScheme = function () {
-	const colorScheme = [
+  const self = this;
+  const colorScheme = [
 		'#e2e2e2',
 		'#919191',
 		'#484848',
 		'#030303'
 	];
 	return function (d,i) {
-		return colorScheme[i];
+		return self.foccused !== null && self.foccused == i ? '#ff000055' : colorScheme[i];
 	}
 }
 
@@ -64,18 +68,18 @@ StackedChart.prototype.data = function (year) {
 }
 
 StackedChart.prototype.draw = function (year) {
-	var data = this.data(year);
+  const self = this;
+  var data = this.data(year);
 	var x = this.scaleX(data.headers);
 	var y = this.scaleY([
 		d3.min(data.source[0].map(d => d.value)), 
 		d3.max(data.source[data.source.length-1].map(d => d.top))
 	]);
-	// console.log(data);
 	var areaFn = this.areaGen(x,y);
 	var colors = this.colorScheme();
 
 	var categories = this.content.selectAll('.area').data(data.values, function (d,i) {
-		return 'gridcode-'+String(i+1);
+		return 'gridcode-'+String(i+2);
 	});
 	
 
@@ -84,13 +88,44 @@ StackedChart.prototype.draw = function (year) {
 	var categoriesEnter = categories.enter()
 		.append('path')
 		.attr('class','area')
-		.attr('gridcode', function (d,i) { 
-			console.log("d:"+d,"i:"+i);
-			return i+1});
+    .attr('gridcode', function (d,i) { return i+2 })
+    .style("cursor", "pointer")
+    .on('mouseover', this.onMouseOver.bind(this))
+    .on('mouseout', this.onMouseLeave.call(this));
 
 	categories = categories.merge(categoriesEnter)
 		.attr('d', areaFn)
 		.attr('fill', colors);
-	console.log(categories);
 
 };
+
+StackedChart.prototype.onMouseOver = function (input) {
+  const gridcode = input.gridcode != null ? input.gridcode : event.srcElement.getAttribute('gridcode');
+  var targetArea;
+  const areas = Array.apply(null, this.content.node().getElementsByClassName('area'));
+  areas.map((area,i) => {
+    area.setAttribute('fill', this.colorScheme()(null, i));
+    if (area.getAttribute('gridcode') == gridcode) {
+      this.foccused = i;
+      targetArea = area;
+    }
+  });
+
+  targetArea.setAttribute('fill', '#ff000055');
+  input.manual !== true && this.publicOnMouseOver({gridcode: gridcode, manual: true});
+};
+
+StackedChart.prototype.onMouseLeave = function () {
+  const self = this;
+  var debouncedMouseLeave = function () {
+    Array.apply(null, self.content.node().getElementsByClassName('area')).map((area, i) => {
+      area.setAttribute('fill', self.colorScheme()(null, i));
+    });
+  };
+  return function (input) {
+    self.foccused = null;
+    clearTimeout(debouncedMouseLeave);
+    setTimeout(debouncedMouseLeave, 150);
+    input.manual !== true && self.publicOnMouseLeave({manual: true});
+   }
+}
