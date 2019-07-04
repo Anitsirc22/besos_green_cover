@@ -1,10 +1,8 @@
 function MouseCatcher (id) {
   this.isActive = false;
   this.id = id;
-  this.size = {
-    width: window.innerWidth,
-    heigiht: window.innerHeight
-  };
+  this.getSize();
+  window.addEventListener('resize', this.getSize.bind(this));
   this.sections = {
     left: document.getElementsByClassName('left-section')[0],
     right: document.getElementsByClassName('right-section')[0],
@@ -16,7 +14,6 @@ MouseCatcher.prototype.catch = function () {
   document.addEventListener('mousemove', (function (self) {
     return function (ev) {
       if (ev.screenX/self.size.width > 0.95) {
-        debugger;
         if (!self.sections.right.classList.contains('visible')) {
           self.sections.left.classList.remove('visible');
           self.sections.right.classList.add('visible');
@@ -29,4 +26,11 @@ MouseCatcher.prototype.catch = function () {
       }
     }
   })(this));
+}
+
+MouseCatcher.prototype.getSize = function () {
+    this.size = {
+      width: window.innerWidth,
+      heigiht: window.innerHeight
+    };
 }

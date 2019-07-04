@@ -1,11 +1,64 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const leafletMap = new LeafletMap();
+  const dataParser = new DataParser();
+  dataParser.parse(summaryData);
+
+  const lineChart = new LineChart({
+  	model: dataParser,
+  	el: document.getElementById('lineChart'),
+  	margins: {
+  		left: 50,
+  		right: 50,
+  		top: 5,
+  		bottom: 50
+  	}
+  });
+
+  const stackedChart = new StackedChart({
+  	model: dataParser,
+  	el: document.getElementById('stacked-container'),
+  	margins: {
+  		left: 0,
+  		right: 0,
+  		top: 100,
+  		bottom: 0
+  	}
+  });
+
+    const leafletMap = new LeafletMap({
+  	onMouseOver: function () {
+  		// stackedChart.highlight(gridcode);
+  	},
+  	onMouseLeave: function () {
+  		// stackedChart.highlight(null);
+  	}
+  });
+
+/*  .call(context, arg1, arg2, arg3, argN);
+  .apply(context, **args)*/
+
+  const sliderCallback = function () {
+  	return function () {
+  		lineChart.draw.apply(lineChart, arguments);
+  		stackedChart.draw.apply(stackedChart, arguments);
+  		leafletMap.data.apply(leafletMap, arguments);
+  	}
+  }();
+
   const sliderHandler = new SliderHandler({
-    callback: leafletMap.data.bind(leafletMap)
+    callback: sliderCallback
   });
   const mouseCathcer = new MouseCatcher();
   mouseCathcer.catch();
+
+  leafletMap.draw();
+/*  lineChart.draw();
+  stackedChart.draw();*/
+
+  window.onresize = function () {
+  	lineChart.draw(sliderHandler.currentYear);
+  	stackedChart.draw(sliderHandler.currentYear);
+  }
   // sliderHandler.slider.addEventListener('change', function (ev) {
   //   console.log(ev);
   //   leafletMap.update(2015);

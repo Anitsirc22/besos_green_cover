@@ -10,14 +10,22 @@
 
 	<!-- VENDOR -->
   	<script type="text/javascript" src="vendor/leaflet/leaflet.js"></script>
+  	<link type="text/css" rel="stylesheet" href="vendor/leaflet/leaflet.css" />
   	<script src="vendor/Leaflet.pattern-master/dist/leaflet.pattern-src.js"></script>
 
 	<!-- STYLES -->
 	<link href="/styles/main.css" rel="stylesheet" type="text/css"/>
   <link href="/styles/images.css" rel="stylesheet" type="text/css"/>
   <link href="/styles/layout.css" rel="stylesheet" type="text/css"/>
+  <link href="/styles/charts.css" rel="stylesheet" type="text/css"/>
 
 	<!-- DATA -->
+  <script src="csv/summary_allYears.csv"></script>
+  <script src="json/ndvi_reclass_2009.json"></script>
+  <script src="json/ndvi_reclass_2010.json"></script>
+  <script src="json/ndvi_reclass_2011.json"></script>
+  <script src="json/ndvi_reclass_2012.json"></script>
+  <script src="json/ndvi_reclass_2013.json"></script>
   <script src="json/ndvi_reclass_2014.json"></script>
   <script src="json/ndvi_reclass_2015.json"></script>
   <script src="json/ndvi_reclass_2016.json"></script>
@@ -36,9 +44,11 @@
     </div>
     <div class="right-section app-section visible">
       <div class="label-wrapper">
-        <div id="label">hello</div>
+        <div id="label"></div>
+        <!-- <div id="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div> -->
       </div>
       <div class="image-container">
+      	<div id="lineChart" class="chart"></div>
         <div class="image image2009" ></div>
         <div class="image image2010" ></div>
         <div class="image image2011" ></div>
@@ -55,11 +65,19 @@
 			<input value=0 max=70 min=0 step=1 type="range" id="slider"></div>
 		</div>
 
-	<script src="script/map.js"></script>
-  <script src="script/graph.js"></script>
-  <script type="text/javascript" src="script/mouseListener.js"></script>
-  <script type="text/javascript" src="script/sliderHandler.js"></script>
-  <script type="text/javascript" src="script/main.js"></script>
-	<script type="text/javascript" src="script/leaflet_map.js"></script>
+   	<!-- <script src="script/views/map.js"></script> -->
+   	<!-- MODELS -->
+   	<script src="script/models/DataParser.js"></script>
+
+  	<!-- VIEWS -->
+  	<script src="script/views/LineChart.js"></script>
+  	<script src="script/views/StackedChart.js"></script>
+  	<script type="text/javascript" src="script/views/LeafletMap.js"></script>
+
+  	<!-- HELPERS -->
+  	<script type="text/javascript" src="script/helpers/MouseListener.js"></script>
+  	<script type="text/javascript" src="script/helpers/SliderHandler.js"></script>
+
+  	<script type="text/javascript" src="script/main.js"></script>
 </body>
 </html>

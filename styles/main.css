@@ -9,9 +9,13 @@ body {margin: 0px; padding: 0px; box-sizing: border-box; font-size: 12px;}
 
 .label-wrapper {
 	position: absolute;
-	right: 10px;
-	top: 100px;
+	right: 40px;
+	top: 50px;
 	z-index: 500;
+}
+
+#label{
+  font-size:25px;
 }
 
 #slider {

@@ -3,30 +3,32 @@ var SliderHandler = function (settings) {
   this.inputCallback = settings.callback;
   this.slider=document.getElementById("slider");
   this.label = document.getElementById('label');
-	this.images=Array.apply(null, document.getElementsByClassName("image"));//retorna una llista dels div
-	this.baseImage = this.images.shift();//to delete the first item of the list
+  this.images=Array.apply(null, document.getElementsByClassName("image"));//retorna una llista dels div
+  this.baseImage = this.images.shift();//to delete the first item of the list
   
   this.slider.addEventListener('mousemove', function (ev) {}, true);
   this.slider.addEventListener("input", this.sliderChangeCallback.bind(this)); //when the slider notify an input the value);
   // slider.addEventListener("change", sliderChangeCallback); //when the slider value changes the value);
 
-	this.animation = setInterval((function (self) {
-		var index = 0;
-		return function () {
-			index++;
+  this.animation = setInterval((function (self) {
+    var index = 0;
+    return function () {
+      index++;
       self.slider.value = index;
-			self.sliderChangeCallback({srcElement: self.slider});
-			if (index == self.slider.getAttribute('max')) {
-				clearInterval(self.animation);
-			}
-		}
-	})(this), 200);
+      self.sliderChangeCallback({srcElement: self.slider});
+      if (index == self.slider.getAttribute('max')) {
+        clearInterval(self.animation);
+      }
+    }
+  })(this), 200);
 };
 
 SliderHandler.prototype.sliderChangeCallback = function (e) {
   let value = e.srcElement.value;
-  let index = Math.min(6, Math.floor(value/10));//map floor perque no agafi el valor del max slider, el 7
-  this.inputCallback(2014+index);
+  let index = Math.min(6, Math.floor(value/10));
+  let layerIndex = Math.min(7, Math.floor(value/10));//map floor perque no agafi el valor del max slider, el 7
+  this.currentYear = 2009+layerIndex;
+  this.inputCallback(2009+layerIndex);
   if (index >= 1) {
     this.images[index-1].style.opacity = 1;//l'any anterior amb opacity 1
   }
@@ -38,7 +40,7 @@ SliderHandler.prototype.sliderChangeCallback = function (e) {
   }
   let opacity = (value-(index*10))/10;
   currentImage.style.opacity = opacity;
-  this.label.innerText = this.getMonth(index);
+  this.label.innerText = this.getMonth(layerIndex);
 };
 
 SliderHandler.prototype.getMonth = function (sliderValue) {
@@ -65,7 +67,7 @@ SliderHandler.prototype.getMonth = function (sliderValue) {
     case 6:
       text="Agost 2015";
       break;
-    case 6.99:
+    case 7:
       text="Novembre 2016";
       break;
   }
