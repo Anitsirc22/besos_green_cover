@@ -20,18 +20,22 @@ document.addEventListener("DOMContentLoaded", function () {
   	margins: {
   		left: 0,
   		right: 0,
-  		top: 100,
-  		bottom: 0
-  	}
+  		top: 0,
+  		bottom: 50
+    },
+    onMouseOver: function () {
+      leafletMap.highlightFeatures.apply(leafletMap, arguments);
+    },
+    onMouseLeave: function () {
+      leafletMap.resetHighlight.apply(leafletMap, arguments);
+    }
   });
 
-    const leafletMap = new LeafletMap({
+  const leafletMap = new LeafletMap({
   	onMouseOver: function () {
-  		// stackedChart.highlight(gridcode);
+      stackedChart.onMouseOver.apply(stackedChart, arguments);
   	},
-  	onMouseLeave: function () {
-  		// stackedChart.highlight(null);
-  	}
+  	onMouseLeave: stackedChart.onMouseLeave.call(stackedChart)
   });
 
 /*  .call(context, arg1, arg2, arg3, argN);
