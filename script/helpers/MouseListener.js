@@ -13,12 +13,12 @@ MouseCatcher.prototype.catch = function () {
   // var screen = document.getElementById('mouse-catcher');
   document.addEventListener('mousemove', (function (self) {
     return function (ev) {
-      if (ev.screenX/self.size.width > 0.95) {
+      if (ev.screenX/self.size.width > 0.995) {
         if (!self.sections.right.classList.contains('visible')) {
           self.sections.left.classList.remove('visible');
           self.sections.right.classList.add('visible');
         }
-      } else if (ev.screenX/self.size.width < 0.05) {
+      } else if (ev.screenX/self.size.width < 0.005) {
         if (!self.sections.left.classList.contains('visible')) {
           self.sections.right.classList.remove('visible');
           self.sections.left.classList.add('visible');

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   		left: 0,
   		right: 0,
   		top: 0,
-  		bottom: 50
+  		bottom: 55
     },
     onMouseOver: function () {
       leafletMap.highlightFeatures.apply(leafletMap, arguments);

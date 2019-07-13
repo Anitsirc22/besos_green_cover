@@ -47,28 +47,28 @@ SliderHandler.prototype.getMonth = function (sliderValue) {
   var text;
   switch (sliderValue) {
     case 0:
-      text="Agost 2009";
+      text="August 2009";
       break;
     case 1:
-      text="Octubre 2010";
+      text="October 2010";
       break;
     case 2:
-      text="Juny 2011";
+      text="June 2011";
       break;
     case 3:
-      text="Maig 2012";
+      text="May 2012";
       break;
     case 4:
-      text="Juny 2013";
+      text="June 2013";
       break;
     case 5:
-      text="Juny 2014";
+      text="June 2014";
       break;
     case 6:
-      text="Agost 2015";
+      text="August 2015";
       break;
     case 7:
-      text="Novembre 2016";
+      text="November 2016";
       break;
   }
   return text;
