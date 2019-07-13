@@ -20,6 +20,8 @@
 
 .left-section .map-container {
   flex: 1;
+  margin-right: 250px;
+  /* width: auto; */
 }
 
 .left-section #stacked-container {

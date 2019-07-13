@@ -33,7 +33,7 @@ LineChart.prototype.lineFn = function (scaleX, scaleY) {
 	return d3.line()
     	.x(function(d, i) { return scaleX(i); }) // set the x values for the line generator
     	.y(function(d) { return scaleY(d); }) // set the y values for the line generator 
-    	// .curve(d3.curveMonotoneX)
+    	.curve(d3.curveMonotoneX)
 }
 
 LineChart.prototype.data = function (year) {
@@ -64,8 +64,10 @@ LineChart.prototype.draw = function (year) {
 	var pointsEnter = points.enter()
 		.append('circle')
 		.attr('class','point')
-		.attr('r','5')
-		.style('fill', 'grey');
+    .attr('r','4')
+    .style('stroke','#ff73739e')
+    .style('stroke-width','3')
+		.style('fill', '#ffffff');
 
 	points = points.merge(pointsEnter)
 		.attr('cx', function (d,i) {
@@ -79,8 +81,8 @@ LineChart.prototype.draw = function (year) {
 		.append('path')
 		.attr('class','line')
 		.attr('fill','none')
-		.attr('stroke','red')
-		.attr('stroke-width','2');
+		.attr('stroke','#ff73739e')
+		.attr('stroke-width','3');
 
 	lines.exit().remove();
 

@@ -1,8 +1,13 @@
 var SliderHandler = function (settings) {
   this.animation;
   this.inputCallback = settings.callback;
+  this.model = settings.model;
   this.slider=document.getElementById("slider");
-  this.label = document.getElementById('label');
+  this.labelR = document.getElementById('labelRight');
+  this.labelL = document.getElementById('labelLeft');
+  this.valueR = document.getElementById('valueRight');
+  this.valueL = document.getElementById('valueLeft');
+  this.stackedLegenItems = Array.apply(null, document.getElementsByClassName('legend-item'));
   this.images=Array.apply(null, document.getElementsByClassName("image"));//retorna una llista dels div
   this.baseImage = this.images.shift();//to delete the first item of the list
   
@@ -40,7 +45,11 @@ SliderHandler.prototype.sliderChangeCallback = function (e) {
   }
   let opacity = (value-(index*10))/10;
   currentImage.style.opacity = opacity;
-  this.label.innerText = this.getMonth(layerIndex);
+  this.labelR.innerText = this.getMonth(layerIndex);
+  this.labelL.innerText = this.getMonth(layerIndex);
+  this.valueR.innerText = parseInt(this.model.getLineLabel(this.currentYear), 10);
+  var stackedLabel = this.model.getStackedLabel(this.currentYear, this.category);
+  this.valueL.innerHTML = `<span>${parseInt(stackedLabel.absolute)} m2</span> (${stackedLabel.relative}%)`;
 };
 
 SliderHandler.prototype.getMonth = function (sliderValue) {
@@ -73,3 +82,16 @@ SliderHandler.prototype.getMonth = function (sliderValue) {
   }
   return text;
   }
+
+SliderHandler.prototype.setCategory = function (category) {
+  this.category = category.gridcode != null ? category.gridcode - 2 : null;
+  var stackedLabel = this.model.getStackedLabel(this.currentYear, this.category);
+  this.valueL.innerHTML = `<span>${parseInt(stackedLabel.absolute)} m2</span> (${stackedLabel.relative}%)`;
+  this.stackedLegenItems.map((el) => {
+    if (el.getAttribute('gridcode') == this.category) {
+      el.classList.add('highlighted');
+    } else {
+      el.classList.remove('highlighted');
+    }
+  });
+}

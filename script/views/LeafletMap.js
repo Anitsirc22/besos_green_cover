@@ -10,8 +10,6 @@ function LeafletMap (settings) {
   this.map.setZoom(17);
   this.publicOnMouseOver = settings.onMouseOver;
   this.publicOnMouseLeave = settings.onMouseLeave;
-/*
-  debugger;*/
 
   // //STYLES
   // this.shape = new L.PatternCircle({ x: 7, y: 7, radius: 4, fill: true, color:'black',weight:2});

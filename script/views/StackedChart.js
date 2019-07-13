@@ -109,7 +109,6 @@ StackedChart.prototype.onMouseOver = function (input) {
       this.foccused = i;
       targetArea = area;
     }
-    debugger;
   });
 
   targetArea.setAttribute('fill', '#ff000055');

@@ -100,3 +100,39 @@ DataParser.prototype.getStackedData = function () {
 	};
 
 }
+
+DataParser.prototype.getLineLabel = function (year) {
+  const lineChartData = this.getLineChartData();
+  return lineChartData.values[lineChartData.headers.indexOf(String(year))];
+}
+
+DataParser.prototype.getStackedLabel = function (year, category) {
+  debugger;
+  const stackedChartData = this.getStackedData();
+  const yearIdx = stackedChartData.headers.indexOf(String(year));
+  var absolute, relative, total;
+  // {
+  //   "values": [
+  //     [12354, 12356, 2651],
+  //     [],
+  //     [],
+  //     []
+  //   ],
+  //   "headers": [2009, 2010, 2011]
+  // }
+  total = stackedChartData.values.reduce((acum, cateogryData, i) => {
+    if (i == category) {
+      absolute = cateogryData[yearIdx].value;
+    }
+    return acum + cateogryData[yearIdx].value;
+  }, 0);
+
+  relative = category != null ? (absolute/total*100).toFixed(2) : 100.00;
+  absolute = absolute || total;
+
+  return {
+    absolute: absolute,
+    relative: relative,
+    total: total
+  }
+}

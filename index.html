@@ -34,6 +34,17 @@
 <body>
 	<div id="main-content">
     <div class="left-section app-section">
+      <div class="label-wrapper">
+          <div id="labelLeft"></div>
+          <div id="valueLeft" class="left-section-value section-value"></div>
+          <div class="left-section-description section-description">
+            <p>Raster images have been processed using GIS tools to classify all patterns of vegetationaccording to the ranges defined by the ICGC<p>
+            <p class="legend-item" gridcode=0><span>Category 2</span><span>0 < NDVI <0.2</span><span>Bare soil or dead vegetation</span></p>
+            <p class="legend-item" gridcode=1><span>Category 3</span><span>0.2 < NDVI <0.4</span><span>Scattered or little vigorous vegetation</span></p>
+            <p class="legend-item" gridcode=2><span>Category 4</span><span>0.4 < NDVI <0.6</span><span>Abundant and vigorous vegetation</span></p>
+            <p class="legend-item" gridcode=3><span>Category 5</span><span>NDVI > 0.6</span><span>Very dense and vigorous vegetation</span></p>
+          </div>
+        </div>
       <div class="map-container">
         <div id=map-leaflet></div>
         <!-- <svg id="map"></svg> -->
@@ -44,8 +55,12 @@
     </div>
     <div class="right-section app-section visible">
       <div class="label-wrapper">
-        <div id="label"></div>
-        <!-- <div id="text">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div> -->
+        <div id="labelRight"></div>
+        <div id="valueRight" class="right-section-value section-value"></div>
+        <div class="right-section-description section-description">
+          <p>The Besòs River is a spanish river located in the province of Barcelona. It was considered one of the most polluted rivers in Europe in the last decades of the 20th entury as a result of the industries that were placed around it and the population increase that occurred at that time. From the construction of sewage plants along the river and the environmental recovery project of the final section of the river, many species of flora and fauna have been recovered.</p>
+          <p>This is a research on the evolution of the green cover in the river mouth. Images with infrared band information provided by the ICGC have been analyzed to calculate the NDVI values over the period 2009-2016. It is important to consider that photometric flights have been carried out in different months of the year, for this reason a non-continuous growth of the vegetation can be appreciated.</p>
+        </div>
       </div>
       <div class="image-container">
       	<div id="lineChart" class="chart"></div>

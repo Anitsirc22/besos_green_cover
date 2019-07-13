@@ -24,18 +24,27 @@ document.addEventListener("DOMContentLoaded", function () {
   		bottom: 55
     },
     onMouseOver: function () {
+      sliderHandler.setCategory.apply(sliderHandler, arguments);
       leafletMap.highlightFeatures.apply(leafletMap, arguments);
     },
     onMouseLeave: function () {
+      sliderHandler.setCategory.call(sliderHandler, {gridcode: null});
       leafletMap.resetHighlight.apply(leafletMap, arguments);
     }
   });
 
   const leafletMap = new LeafletMap({
   	onMouseOver: function () {
+      sliderHandler.setCategory.apply(sliderHandler, arguments);
       stackedChart.onMouseOver.apply(stackedChart, arguments);
   	},
-  	onMouseLeave: stackedChart.onMouseLeave.call(stackedChart)
+  	onMouseLeave: function () {
+      var __callback = stackedChart.onMouseLeave.call(stackedChart);
+      return function () {
+        sliderHandler.setCategory.call(sliderHandler, {gridcode: null});
+        __callback.apply(null, arguments);
+      }
+    }()
   });
 
 /*  .call(context, arg1, arg2, arg3, argN);
@@ -50,7 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }();
 
   const sliderHandler = new SliderHandler({
-    callback: sliderCallback
+    callback: sliderCallback,
+    model: dataParser
   });
   const mouseCathcer = new MouseCatcher();
   mouseCathcer.catch();
