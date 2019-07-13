@@ -107,7 +107,7 @@ DataParser.prototype.getLineLabel = function (year) {
 }
 
 DataParser.prototype.getStackedLabel = function (year, category) {
-  debugger;
+  
   const stackedChartData = this.getStackedData();
   const yearIdx = stackedChartData.headers.indexOf(String(year));
   var absolute, relative, total;

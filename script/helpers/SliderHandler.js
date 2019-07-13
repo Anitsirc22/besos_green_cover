@@ -47,7 +47,7 @@ SliderHandler.prototype.sliderChangeCallback = function (e) {
   currentImage.style.opacity = opacity;
   this.labelR.innerText = this.getMonth(layerIndex);
   this.labelL.innerText = this.getMonth(layerIndex);
-  this.valueR.innerText = parseInt(this.model.getLineLabel(this.currentYear), 10);
+  this.valueR.innerText = "GCI: "+parseInt(this.model.getLineLabel(this.currentYear), 10);
   var stackedLabel = this.model.getStackedLabel(this.currentYear, this.category);
   this.valueL.innerHTML = `<span>${parseInt(stackedLabel.absolute)} m2</span> (${stackedLabel.relative}%)`;
 };
